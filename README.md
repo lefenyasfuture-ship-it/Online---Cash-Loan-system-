@@ -1,5 +1,9 @@
-# Online---Cash-Loan-system-
-EdCash/
-├── backend/                # Node.js + Express + SQLite
-├── frontend/               # React frontend
-└── README.md
+Online---Cash-Loan-system-/
+├── backend/
+├── frontend/
+│   ├── package.json
+│   ├── src/
+│   └── public/
+└── .github/
+    └── workflows/
+        └── deploy.yml
