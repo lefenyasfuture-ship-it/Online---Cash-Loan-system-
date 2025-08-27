@@ -2,21 +2,21 @@ name: Deploy EdCash to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" ]        # Trigger on push to main branch
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch:
+  workflow_dispatch:             # Manual trigger
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout your repository
+      # 1. Checkout the repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Set up Node.js
+      # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -25,18 +25,18 @@ jobs:
       # 3. Install dependencies
       - name: Install dependencies
         run: npm install
-        working-directory: .   # root folder
+        working-directory: .      # Root folder
 
       # 4. Build the React app
       - name: Build frontend
         run: npm run build
-        working-directory: .   # root folder
+        working-directory: .      # Root folder
 
-      # 5. Upload build artifacts for Pages
+      # 5. Upload build artifacts for GitHub Pages
       - name: Upload build for GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./build
+          path: ./build           # Build output folder
 
   deploy:
     runs-on: ubuntu-latest
@@ -48,3 +48,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
+
