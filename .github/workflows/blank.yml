@@ -1,12 +1,10 @@
 name: Deploy EdCash Frontend to GitHub Pages
 
-# Triggers
 on:
   push:
     branches: ["main"]
   workflow_dispatch:
 
-# Permissions
 permissions:
   contents: read
   pages: write
@@ -17,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repo
+      # Step 1: Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -27,21 +25,21 @@ jobs:
         with:
           node-version: 20
 
-      # Step 3: Install dependencies (frontend)
+      # Step 3: Install frontend dependencies
       - name: Install frontend dependencies
         run: npm ci
-        working-directory: ./frontend
+        working-directory: ./frontend   # <-- Make sure this matches your folder name
 
       # Step 4: Build frontend
       - name: Build frontend
         run: npm run build
-        working-directory: ./frontend
+        working-directory: ./frontend   # <-- Make sure this matches your folder name
 
       # Step 5: Upload build to GitHub Pages
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./frontend/build
+          path: ./frontend/build         # <-- React build folder
 
       # Step 6: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
