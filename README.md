@@ -16,3 +16,9 @@ Online---Cash-Loan-system-/
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./build        # React build output at root
+"scripts": {
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject"
+}
