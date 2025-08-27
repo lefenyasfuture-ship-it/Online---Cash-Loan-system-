@@ -20,18 +20,18 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install frontend dependencies
+      - name: Install dependencies
         run: npm install
-        working-directory: ./frontend
+        working-directory: .
 
-      - name: Build frontend
+      - name: Build project
         run: npm run build
-        working-directory: ./frontend
+        working-directory: .
 
       - name: Upload build for GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./frontend/build
+          path: ./build
 
   deploy:
     runs-on: ubuntu-latest
