@@ -1,47 +1,12 @@
-name: Deploy EdCash Frontend to GitHub Pages
+- name: Install dependencies
+  run: npm ci
+  working-directory: .   # root instead of ./frontend
 
-on:
-  push:
-    branches: ["main"]
-  workflow_dispatch:
+- name: Build project
+  run: npm run build
+  working-directory: .   # root instead of ./frontend
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-      # Step 1: Checkout repository
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # Step 2: Setup Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      # Step 3: Install frontend dependencies
-      - name: Install frontend dependencies
-        run: npm ci
-        working-directory: ./frontend   # <-- Make sure this matches your folder name
-
-      # Step 4: Build frontend
-      - name: Build frontend
-        run: npm run build
-        working-directory: ./frontend   # <-- Make sure this matches your folder name
-
-      # Step 5: Upload build to GitHub Pages
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./frontend/build         # <-- React build folder
-
-      # Step 6: Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+- name: Upload build
+  uses: actions/upload-pages-artifact@v3
+  with:
+    path: ./build        # React build output at root
